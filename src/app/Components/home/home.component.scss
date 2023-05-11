@@ -1,0 +1,195 @@
+
+.w-90 {
+    width: 90%;
+}
+
+.group {
+    position: relative;
+    margin-bottom: 45px;
+    width: 75%;
+}
+
+input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+/* CARD ================================= */
+
+.card-header h4 {
+    margin: 0px !important;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown-item {
+    padding: 10px 16px !important;
+}
+
+/* LABEL ======================================= */
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus~label,
+input:valid~label {
+    top: -10px;
+    font-size: 14px;
+    color: #0d6efd;
+}
+
+/* MODAL ================================= */
+.modal-header {
+    border-bottom: 0 !important;
+}
+
+
+.modal-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 0px !important;
+}
+
+.modal-footer {
+    border-top: 0 !important;
+}
+
+/* NOTE ================================= */
+.note {
+    border: 1px solid #999;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.bar:before,
+.bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 0.5px;
+    position: absolute;
+    background: #0d6efd;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+input:focus~.bar:before,
+input:focus~.bar:after {
+    width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+input:focus~.highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #0d6efd;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #0d6efd;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #0d6efd;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+/* ALERT ================ */
+.alert , .alert-danger {
+    margin: 2px 0px !important;
+    padding: 8px !important;
+    background-color: transparent !important;
+    border: 0;
+    color: red;
+}
+
+.alert p {
+    margin: 0px !important;
+}
+
+
+/* MEDIA QUERY ================ */
+@media screen and (max-width:992px) {
+    .group {
+        width: 75%;
+    }
+}

@@ -1,0 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:576px) {
+    .logoutSpan {
+        display: none;
+    }
+    .logoutIcon {
+        margin-left: 0px !important;
+    }
+    .dropdown-menu{
+        left: -50px !important;
+    }
+}

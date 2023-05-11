@@ -1,0 +1,58 @@
+<section class="outerContainer px-md-3 py-5 min-vh-100">
+
+    <div class="formContainer row w-90 m-auto g-0 overflow-hidden rounded shadow">
+        <div class="col-lg-7 d-none d-lg-block">
+            <div class="image">
+
+            </div>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-center align-items-center">
+
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)"
+                class="d-flex flex-column align-items-center justify-content-center mt-3 py-3 w-90">
+
+
+                <h1 class="text-center display-1">Login</h1>
+
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="email" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Email</label>
+                    <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="loginForm.get('email')?.getError('email')">Email Is Not Valid</p>
+                        <p *ngIf="loginForm.get('email')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="password" type="password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Password</label>
+                    <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="loginForm.get('password')?.getError('pattern')">Password Is Not Valid</p>
+                        <p *ngIf="loginForm.get('password')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+
+
+                <div class="loginBtn d-flex justify-content-center py-2">
+                    <button [disabled]="loginForm.invalid" class="btn btn-primary" type="submit">Login</button>
+                </div>
+
+                <div class="alert alert-danger m-auto bg-dark">
+                    <p class="fw-bold">{{loginError}}</p>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,146 @@
+<section class="py-5">
+
+    <!-- Search Input -->
+    <div class="group w-100" *ngIf="notes.length">
+        <input [(ngModel)]="value" type="text">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Search by title</label>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <div class=" d-flex justify-content-end w-90">
+        <button (click)="closeUpdate()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <span>Add Note</span>
+            <i class="fa-solid fa-plus ms-2"></i>
+        </button>
+    </div>
+
+    <!-- All Notes -->
+    <div *ngIf="!noNotes" class="container py-5">
+        <div class="row gy-4">
+            <div class="col-lg-4" *ngFor="let note of notes | filter:value; let i = index">
+                <div class="card shadow-sm order-light mb-3" style="width:100%;">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4>Note {{i+1}}</h4>
+                        <div class="dropdown">
+                            <button class="btn ropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton1">
+                                <li><button (click)="openUpdate(note)"
+                                        class="dropdown-item d-flex justify-content-between align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">
+                                        <span>Update</span>
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </li>
+                                <li><button [swal]="deleteSwal"
+                                        class="dropdown-item d-flex justify-content-between align-items-center"
+                                        type="button">
+                                        <span>Delete</span>
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </li>
+
+                                <swal #deleteSwal title="Delete {{ note.title }}?" text="This cannot be undone"
+                                    icon="question" [showCancelButton]="true" [focusCancel]="true"
+                                    (confirm)="deleteNote(note._id,i)">
+                                </swal>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title text-primary fw-bold">{{note.title}}</h3>
+                        <p class="card-text">{{note.desc}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="noNotes" class="container d-flex flex-column justify-content-center align-items-center py-5">
+        <img src="../../../assets/3973477.svg" class="w-50" alt="No Data">
+
+        <h2>You Didn't Add Any Notes Yet!</h2>
+    </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header mb-4">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Note Data</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="dataForm" (ngSubmit)="sendData(dataForm)">
+
+                    <div *ngIf="!updateFlag" class="group w-100 my-2">
+                        <input formControlName="title" type="text" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Note Title</label>
+                        <div *ngIf="dataForm.get('title')?.errors && dataForm.get('title')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('title')?.getError('required')">Required</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="updateFlag" class="group w-100 my-2">
+                        <input formControlName="title" [(ngModel)]="titleInp" (input)="updateButtonState()" type="text" id="titleToBeUpdated">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Note Title</label>
+                        <div *ngIf="dataForm.get('title')?.errors && dataForm.get('title')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('title')?.getError('required')">Required</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!updateFlag" class="group w-100 my-5 py-4">
+                        <input formControlName="desc" type="text" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Comment</label>
+                        <div *ngIf="dataForm.get('desc')?.errors && dataForm.get('desc')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('desc')?.getError('required')">Required</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="updateFlag" class="group w-100 my-5 py-4">
+                        <input formControlName="desc" [(ngModel)]="descInp" (input)="updateButtonState()" formControlName="desc" type="text" id="descToBeUpdated" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Comment</label>
+                        <div *ngIf="dataForm.get('desc')?.errors && dataForm.get('desc')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('desc')?.getError('required')">Required</p>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+
+                        <button *ngIf="!updateFlag" [disabled]="dataForm.invalid" type="submit" class="btn btn-primary"
+                            data-bs-dismiss="modal">
+                            Add Note
+                        </button>
+
+                        <button *ngIf="updateFlag" [disabled]="isDisabled" type="submit" class="btn btn-primary"
+                            data-bs-dismiss="modal">
+                            Update Note
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

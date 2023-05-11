@@ -1,0 +1,99 @@
+<section class="outerContainer px-md-3 py-5 min-vh-100">
+
+    <div class="formContainer row w-90 m-auto g-0 overflow-hidden rounded shadow">
+        <div class="col-lg-7 d-none d-lg-block">
+            <div class="image">
+
+            </div>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-center align-items-center">
+
+            <form [formGroup]="registerForm" (ngSubmit)="register(registerForm)"
+                class="d-flex flex-column align-items-center justify-content-center mt-3 py-3 w-90">
+
+
+                <h1 class="text-center display-1">Register</h1>
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="first_name" id="first_name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>First Name</label>
+                    <div *ngIf="registerForm.get('first_name')?.errors && registerForm.get('first_name')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="registerForm.get('first_name')?.getError('minlength')">Min. Length Is 3</p>
+                        <p *ngIf="registerForm.get('first_name')?.getError('maxlength')">Max. Length Is 15</p>
+                        <p *ngIf="registerForm.get('first_name')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="last_name" id="last_name" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Last Name</label>
+                    <div *ngIf="registerForm.get('last_name')?.errors && registerForm.get('last_name')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="registerForm.get('last_name')?.getError('minLength')">Min. Length Is 3</p>
+                        <p *ngIf="registerForm.get('last_name')?.getError('maxLength')">Max. Length Is 15</p>
+                        <p *ngIf="registerForm.get('last_name')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="email" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Email</label>
+                    <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="registerForm.get('email')?.getError('email')">Email Is Not Valid</p>
+                        <p *ngIf="registerForm.get('email')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="password" type="password" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Password</label>
+                    <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="registerForm.get('password')?.getError('pattern')">Password Is Not Valid</p>
+                        <p *ngIf="registerForm.get('password')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+
+                <div class="group align-items-center m-auto my-2">
+                    <input formControlName="age" type="number" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Age</label>
+                    <div *ngIf="registerForm.get('age')?.errors && registerForm.get('age')?.touched"
+                        class="alert alert-danger">
+                        <p *ngIf="registerForm.get('age')?.getError('min')">You Must Be Older Than 16</p>
+                        <p *ngIf="registerForm.get('age')?.getError('max')">You Must Be Younger Than 60</p>
+                        <p *ngIf="registerForm.get('age')?.getError('required')">Required</p>
+                    </div>
+                </div>
+
+                <div class="registerBtn d-flex justify-content-center py-2">
+                    <button [disabled]="registerForm.invalid" class="btn btn-primary" type="submit">
+                        Register
+                    </button>
+
+                    <i class="fa-duotone fa-spinner-third fa-spin"></i>
+                </div>
+
+                <div class="alert alert-danger m-auto bg-dark">
+                    <p class="fw-bold">{{emailExistMsg}}</p>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</section>
