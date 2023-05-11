@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
     this.createForm();
     this.userData = jwtDecode(localStorage.getItem('userToken')!);
     this.getNotes();
+    if (!this.notes.length) {
+      this.noNotes = true;
+    }
   }
 
   createForm(): void {
