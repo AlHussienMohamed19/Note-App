@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jwtDecode from 'jwt-decode';
 import { NoteService } from 'src/app/Core/services/note.service';
 import { ToastrService } from 'ngx-toastr';
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   createForm(): void {
     this.dataForm = this._fb.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required,Validators.maxLength(25)]],
       desc: ['', [Validators.required]],
       token: localStorage.getItem('userToken')
     })
@@ -119,6 +119,9 @@ export class HomeComponent implements OnInit {
           // this.getNotes();  => this will work, but I want to reduce the no. of requests
           this.notes.splice(index, 1);
           this.notes = [...this.notes]
+          if (!this.notes.length) {
+            this.noNotes = true;
+          }
         }
       }
     })
@@ -137,7 +140,7 @@ export class HomeComponent implements OnInit {
     const titleInp = document.getElementById('titleToBeUpdated') as HTMLInputElement;
     const descInp = document.getElementById('descToBeUpdated') as HTMLInputElement;
 
-    if (this.titleInp || this.descInp) {
+    if ((this.titleInp || this.descInp) && this.titleInp.length > 0 && this.descInp.length > 0) {
       this.isDisabled = false;
       console.log('Button unlocked');
     } else {

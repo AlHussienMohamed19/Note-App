@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand bg-dark navbar-dark fixed-top">
     <div class="container px-5">
-        <a class="navbar-brand text-uppercase" routerLink="/home">Note</a>
+        <a class="navbar-brand text-uppercase" routerLink="/home">Note-App</a>
         
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul *ngIf="!isLogin" class="navbar-nav ms-auto mb-lg-0">
@@ -18,10 +18,10 @@
 
             <ul *ngIf="isLogin" class="navbar-nav ms-auto mb-sm-0">
                 <li class="d-flex justify-content-center align-items-center">
-                    <h4 class="m-0 text-white text-capitalize">
+                    <h5 class="m-0 text-white text-capitalize">
                         <i class="fa-regular fa-user me-1"></i>
                         {{userName}}
-                    </h4>
+                    </h5>
                     <button (click)="logout()" type="button" class="btn btn-primary ms-4">
                         <span class="logoutSpan">Logout</span>
                         <i class="fa-solid logoutIcon fa-arrow-right-from-bracket ms-2"></i>

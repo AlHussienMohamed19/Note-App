@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title text-primary fw-bold">{{note.title}}</h3>
+                        <h5 class="card-title text-dark fw-bold">{{note.title}}</h5>
                         <p class="card-text">{{note.desc}}</p>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
     </div>
 
     <div *ngIf="noNotes" class="container d-flex flex-column justify-content-center align-items-center py-5">
-        <img src="../../../assets/3973477 1.jpg" class="w-50" alt="No Data">
+        <img src="../../../assets/noData.jpg" class="w-50" alt="No Data">
 
         <h2>You Didn't Add Any Notes Yet!</h2>
     </div>
@@ -90,6 +90,10 @@
                             class="alert alert-danger">
                             <p *ngIf="dataForm.get('title')?.getError('required')">Required</p>
                         </div>
+                        <div *ngIf="dataForm.get('title')?.errors && dataForm.get('title')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('title')?.getError('maxlength')">Max. Length For Title Is 25</p>
+                        </div>
                     </div>
 
                     <div *ngIf="updateFlag" class="group w-100 my-2">
@@ -101,10 +105,14 @@
                             class="alert alert-danger">
                             <p *ngIf="dataForm.get('title')?.getError('required')">Required</p>
                         </div>
+                        <div *ngIf="dataForm.get('title')?.errors && dataForm.get('title')?.touched"
+                            class="alert alert-danger">
+                            <p *ngIf="dataForm.get('title')?.getError('maxlength')">Max. Length For Title Is 25</p>
+                        </div>
                     </div>
 
                     <div *ngIf="!updateFlag" class="group w-100 my-5 py-4">
-                        <input formControlName="desc" type="text" required>
+                        <textarea class="textArea" formControlName="desc" type="text" required></textarea>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Comment</label>
@@ -115,7 +123,7 @@
                     </div>
 
                     <div *ngIf="updateFlag" class="group w-100 my-5 py-4">
-                        <input formControlName="desc" [(ngModel)]="descInp" (input)="updateButtonState()" formControlName="desc" type="text" id="descToBeUpdated" required>
+                        <textarea class="textArea" formControlName="desc" [(ngModel)]="descInp" (input)="updateButtonState()" type="text" id="descToBeUpdated" required></textarea>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Comment</label>
