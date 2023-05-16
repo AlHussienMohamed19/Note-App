@@ -62,10 +62,10 @@
         </div>
     </div>
 
-    <div *ngIf="noNotes" class="container d-flex flex-column justify-content-center align-items-center py-5">
-        <img src="../../../assets/noData.jpg" class="w-50" alt="No Data">
-
-        <h2>You Didn't Add Any Notes Yet!</h2>
+    <div *ngIf="noNotes" style="min-height: 450px;" class="container d-flex flex-column justify-content-center align-items-center py-5">
+        <!-- <img src="../../../assets/noData.jpg" class="w-50" alt="No Data"> -->
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>You Didn't Add Any Notes Yet!</h3>
     </div>
 
 </section>
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
                         <button *ngIf="!updateFlag" [disabled]="dataForm.invalid" type="submit" class="btn btn-primary"
                             data-bs-dismiss="modal">
